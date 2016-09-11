@@ -1,0 +1,39 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/ser.js"></script>
+
+<div id="serC" class="easyui-dialog" title="客户服务分析 > 饼状图 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div id="ser_container" style="height: 300px;max-width:500px; padding:100px"></div>
+</div>
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="serS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="OpenserC();return false;">查看图表</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th>年份</th>
+		<td>
+			<select id="ser_year">
+				<option value=''>全部</option>
+				<option value=2005>2005</option>
+				<option value=2006>2006</option>
+				<option value=2007>2007</option>
+				<option value=2008>2008</option>
+				<option value=2009>2009</option>
+				<option value=2010>2010</option>
+				<option value=2016>2016</option>
+			</select>
+		</td>
+		<th>&nbsp;</th>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+</table>
+<br />
+<table id="ser_list_table" class="data_list_table"></table>

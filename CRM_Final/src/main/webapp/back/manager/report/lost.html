@@ -1,0 +1,25 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/lost.js"></script>
+
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="lostS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+					<th>客户名称</th>
+	<td><input type="text" id="lost_cname" value=""></td>
+					<th>客户经理</th>
+
+	<td><input type="text" id="lost_cusM" value=""></td>
+					
+			</tr>
+</table>
+<br />
+<table id="lost_list_table" class="data_list_table"></table>

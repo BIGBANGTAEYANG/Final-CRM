@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.ServiceMapper">
+	
+		<!-- 新加的分析服务 -->
+	<select id="getServiceTypeAndCount"  parameterType="map"  resultMap="FindServiceMap" >
+		select count(*) as count ,servicetype as servicetype <include refid="servicecount"/>
+	</select>
+	<sql id="servicecount">
+		from service 
+		<where>
+			<if test="createtime!=null and createtime!=''">
+				year(createdate)=#{createtime}
+			</if>
+		</where>
+		group by servicetype
+	</sql>
+	
+
+	<!-- 根据customerid删除Service -->
+	<delete id="deleteServiceByCustomerid"  parameterType="int">
+		delete from service where customerid=#{customerid}
+	</delete>
+	
+	<delete id="deleteService" parameterType="Service">
+		delete from service where id=#{id}
+	</delete>
+	
+	
+	<insert id="insertNewService"  parameterType="Service">
+		<selectKey keyProperty="id"  resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from service
+		</selectKey>
+			insert into service(id,servicetype,summary,customerid,servicestatus,servicerequest,createperson,createdate) values(#{id},#{servicetype.id},#{summary},#{customer.id},#{servicestatus.id},#{servicerequest},#{createperson},#{createdate})
+	</insert>
+
+
+
+	<select id="findServiceByCondition" parameterType="map" resultMap="FindServiceMap">
+		select * <include refid="conditionSql"/>
+	</select>
+	
+	<select id="findServiceCountByCondition" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"/>
+	</select>
+		<sql id="conditionSql">
+		from service 
+		<where>
+			<if test="summary!=null and summary!=''">
+				 summary like '%${summary}%'
+			</if>
+			<if test="servicestatus!=null and servicestatus!=''">
+				and servicestatus = #{servicestatus}
+			</if>
+			<if test="servicetype!=null and servicetype!=''">
+				and servicetype = #{servicetype}
+			</if>
+			<if test="servicemindateString!=null  and servicemaxdateString!=''">
+				 and createdate between  #{servicemindateString} and  #{servicemaxdateString}
+			</if>
+			<if test="idlist!=null and idlist!=''">
+				and
+				 <foreach collection="idlist"  item="customerid" open="" close="" separator="OR">
+					 customerid=#{customerid}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+		
+	
+	
+	
+	<select id="findAllServiceByServiceStatus"  resultMap="FindServiceMap">
+		select * from service where servicestatus=#{servicestatus.id}
+	</select>
+	
+	<select id="getAllServiceCountByServiceStatus" resultType="int">
+		select count(*) from service where servicestatus=#{servicestatus.id} 
+	</select>
+	
+	
+	
+	
+	<update id="updateService" parameterType="Service" >
+		update service <include refid="updateconditionSql"/>
+	</update>
+	<sql id="updateconditionSql">
+		<set>
+			<if test="servicetype!=null and servicetype!=''">servicetype=#{servicetype.id},</if>
+			<if test="summary!=null and summary!=''">summary=#{summary},</if>
+			<if test="customer!=null and customer!=''">customerid=#{customer.id},</if>
+			<if test="servicestatus!=null and servicestatus!=''">servicestatus=#{servicestatus.id},</if>
+			<if test="servicerequest!=null and servicerequest!=''">servicerequest=#{servicerequest},</if>
+			<if test="createperson!=null and createperson!=''">createperson=#{createperson},</if>
+			<if test="createdate!=null and createdate!=''">createdate=#{createdate},</if>
+			<if test="allotperson!=null and allotperson!=''">allotpersonid=#{allotperson.id},</if>
+			<if test="allotdate!=null and allotdate!=''">allotdate=#{allotdate},</if>
+			<if test="servicedeal!=null and servicedeal!=''">servicedeal=#{servicedeal},</if>
+			<if test="dealperson!=null and dealperson!=''">dealpersonid=#{dealperson.id},</if>
+			<if test="dealtime!=null and dealtime!=''">dealtime=#{dealtime},</if>
+			<if test="dealresult!=null and dealresult!=''">dealresult=#{dealresult},</if>
+			<if test="satisify!=null and satisify!=''">satisify=#{satisify.id}</if>
+		</set>
+		<where>
+			id=#{id}
+		</where>
+	</sql>
+	
+	
+
+	<resultMap type="Service"  id="FindServiceMap">
+		<association property="servicestatus"   column="servicestatus"  select="com.crm.mapper.DataDirectoryMapper.getServiceStatus"/>
+		<association property="servicetype"   column="servicetype"  select="com.crm.mapper.DataDirectoryMapper.getServiceType"/>
+		<association property="satisify"   column="satisify"  select="com.crm.mapper.DataDirectoryMapper.getServiceSatisify"/>
+		<association property="customer"   column="customerid"  select="com.crm.mapper.CustomerMapper.getCustomerById"/>
+		<association property="allotperson"   column="allotpersonid"  select="com.crm.mapper.UserInfoMapper.getUserInfo"/>
+		<association property="dealperson"   column="dealpersonid"  select="com.crm.mapper.UserInfoMapper.getUserInfo"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.CustomerMapper">
+	<resultMap type="Customer" id="CustomerMap">
+		<association property="district" column="district" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="grade" column="grade" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="satisfaction" column="satisfaction" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="credit" column="credit" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="customerstatus" column="customerstatus" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="customermanager" column="customermanagerid" select="com.crm.mapper.UserInfoMapper.getUserInfo"></association>
+	</resultMap>
+	
+	<select id="getCustomerByName" parameterType="Customer" resultMap="CustomerMap">
+		select * from customer where cname like '%${cname}%'
+	</select>
+	
+	
+		<insert id="insertCustomer"  parameterType="Customer">
+		<selectKey keyProperty="id"  resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from customer
+		</selectKey>
+			insert into customer(id,cname,customermanagerid) values(#{id},#{cname},#{customermanager.id});
+	</insert>
+	
+	
+	<select id="getCustomer" resultMap="CustomerMap">
+		select * from customer
+	</select>
+	<select id="getCustomerCount" resultType="int">
+		select count(*) from customer
+	</select>
+	<!-- 条件查询语句 -->
+	<sql id="conditionSql">
+		from customer
+		<where>
+			<if test="id != null and id != ''">
+				 id=#{id}
+			</if>
+			<if test="cname != null and cname != ''">
+				and cname like '%${cname}%'
+			</if>
+			<if test="district != null and district != ''">
+				and district=#{district}
+			</if>
+			<if test="customermanagername != null and customermanagername != ''">
+				and customermanagerid in (select id from userinfo where name like '%${customermanagername}')
+			</if>
+			<if test="grade != null and grade != ''">
+				and grade=#{grade}
+			</if>
+		</where>
+	</sql>
+	<select id="findCustomerConditionCount" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"></include>
+	</select>
+	<select id="findCustomerCondition" parameterType="map" resultMap="CustomerMap">
+		select * <include refid="conditionSql"></include>
+	</select>
+	
+	<update id="updateCustomerById" parameterType="Customer">
+		update customer set cname=#{cname},district=#{district.id},grade=#{grade.id},satisfaction=#{satisfaction.id}
+		,credit=#{credit.id},location=#{location},postcode=#{postcode},telphone=#{telphone},fax=#{fax},website=#{website}
+		,license=#{license},legal=#{legal},registermoney=#{registermoney},yearincome=#{yearincome},bank=#{bank}
+		,bankaccount=#{bankaccount},rentnumber=#{rentnumber},taxnumber=#{taxnumber},customermanagerid=#{customermanager.id}
+		where id=#{id}
+	</update>
+	
+	
+	<select id="getCustomerById" parameterType="Customer" resultMap="CustomerMap">
+		select * from customer where id=#{id}
+	</select>
+	<!-- 不含映射 -->
+	<select id="getCustomerByIdWithoutMap" resultMap="CustomerMapWithCustomerMan">
+		select * from customer where id=#{id}
+	</select>
+	<!-- 删除顾客 -->
+	<delete id="deleteCustomerById">
+		delete from customer where id=#{id}
+	</delete>
+	<!-- 含客户经理映射 -->
+	<resultMap type="Customer" id="CustomerMapWithCustomerMan">
+		<association property="customermanager" column="customermanagerid" select="com.crm.mapper.UserInfoMapper.getUserInfo"></association>
+		<association property="customerstatus" column="customerstatus" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+	</resultMap>
+	
+	<!-- 定时器更新客户状态 -->
+	<update id="updateCustomerStatus" parameterType="map">
+		update customer set customerstatus=#{customerstatus} where id in (select customerid from orderinfo where id in 
+		
+		<foreach item="item" index="index" collection="ids" 
+                         open="(" separator="," close=")">
+                        #{item}
+        </foreach>
+		)
+		
+	</update>
+	
+</mapper>

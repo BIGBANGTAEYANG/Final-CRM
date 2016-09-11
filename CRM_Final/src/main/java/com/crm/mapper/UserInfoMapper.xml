@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.UserInfoMapper">
+
+		<select id="getUserInfoByname" resultType="UserInfo">
+			select * from userinfo where name =#{name}
+	</select>
+		
+
+		<delete id="deleteUserInfo" parameterType="UserInfo">
+		delete from userinfo where id = #{id}
+	</delete>
+	
+	
+	<update id="updateUserInfo" parameterType="UserInfo">
+		update userinfo set uname=#{uname},pwd=#{pwd},name=#{name},sex=#{sex.id},userage=#{userage},role=#{role.id},isassign=#{isassign.id}
+		where id=#{id}
+	</update>
+		
+
+		<select id="findAllUserInfoCount" resultType="Integer">
+		select count(*) from userinfo
+	</select>
+	
+	
+	<select id="findAllUserInfoList"  resultMap="DataDirectoryMap">
+		select * from userinfo
+	</select>
+	
+	<insert id="createUserInfo"  parameterType="UserInfo">
+		<selectKey keyProperty="id"  resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from userinfo
+		</selectKey>
+		insert into userinfo values(#{id},#{uname},#{pwd},#{name},#{sex.id},#{userage},#{role.id},#{isassign.id})
+	</insert>
+	
+	<select id="getUserInfo" resultType="UserInfo">
+		select * from userinfo where id=#{userid}
+	</select>
+	
+	<select id="getUserInfoXiaoShou" resultType="UserInfo">
+		select * from userinfo where role = 3
+	</select>
+	
+	
+	<select id="findUserInfo" resultMap="DataDirectoryMap">
+		select * from userinfo  where uname =#{uname} and pwd=#{pwd}
+	</select>
+	
+	<select id="getAllUserInfo" resultType="UserInfo">
+		select * from userinfo
+	</select>
+	
+	<resultMap type="UserInfo"  id="DataDirectoryMap">
+		<association property="role"   column="role"  select="com.crm.mapper.DataDirectoryMapper.getUserRole"/>
+		<association property="sex"   column="sex"  select="com.crm.mapper.DataDirectoryMapper.getUserSex"/>	
+		<association property="isassign"   column="isassign"  select="com.crm.mapper.DataDirectoryMapper.getUserIsassign"/>	
+	</resultMap>
+	
+</mapper>

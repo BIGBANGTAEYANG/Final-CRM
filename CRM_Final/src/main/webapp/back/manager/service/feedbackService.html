@@ -1,0 +1,69 @@
+
+
+<script src="../js/common.js"></script>
+<script src="../js/feedbackService.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<div id="feedbackServiceDialog" class="easyui-dialog" title="客户服务管理 > 服务处理" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveFeedbackService" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	<table class="query_form_table" id="feedbackTable1"></table>
+	<br/>
+	<table class="query_form_table" id="feedbackTable2"></table>
+	<br/>
+	<table class="query_form_table" id="feedbackTable3"></table>
+	<br>
+	<table class="query_form_table" id="feedbackTable4">
+		<tr>
+		<th>处理结果</th>
+		<td><input name="T10" size="20" id="feedback_result" /><span class="red_star">*</span></td>
+		<th>满意度</th>
+		<td>
+			<select id="feedback_sat">
+			
+			</select><span class="red_star">*</span></td>
+	</tr>
+	</table>
+	
+
+</div>	
+<br />
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="feedbackS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th height="28">客户</th>
+		<td><input id="feedback_cname"/></td>
+		<th height="28">概要</th>
+		<td><input id="feedback_sum"/></td>
+		<th height="28">服务类型</th>
+		<td>
+			<select name="D1" id="feedback_stype">
+				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th height="22">创建日期</th>
+		<td colspan="3">
+			<input name="T2" size="10" id="feedback_starttime" /> - <input name="T1" size="10" id="feedback_endtime" /></td>
+		<th height="22">状态</th>
+		<td>
+			<select name="D1" id="feedback_statu">
+				<option selected value=38 >已处理
+				
+				</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<table id="feedbackService_list_table" class="data_list_table"></table>

@@ -1,0 +1,96 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/dev.js"></script>
+
+<div id="devDetailOption" class="easyui-dialog" title="客户开发计划 > 查看" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeDetailOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	</div>
+	
+	<table id="devTable" class="query_form_table" >
+	</table>
+	<table class="query_form_table" id="devTable2">
+	
+	<table class="query_form_table" id="devTable3">
+</table>
+</div>
+<div id="makePlan" class="easyui-dialog" title="客户开发计划 > 制定计划" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closePlan()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	</div>
+	<table class="query_form_table" id="planTable1">
+	
+	</table>
+	<br />
+	<table disabled class="query_form_table" id="planTable2">
+	
+   </table>
+   <br />
+   <div class="button_bar">
+	<a  href="#" id="makePlanSave" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="return false;">保存</a>
+	</div> 
+	<table disabled class="query_form_table" id="planTable3">
+		<tr>
+		<th>日期</th>
+		<td><input id="dev_time" /><span class="red_star">*</span></td>
+		<th>计划项</th>
+		<td>
+			<input id="dev_planitem" size="50" name="T2" /><span class="red_star">*</span>
+		</td>
+	</tr>
+   </table>
+
+</div>
+<div id="executePlan" class="easyui-dialog" title="客户开发计划 > 执行计划" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeexecutePlan()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="endExecute" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-no'"  onclick="return false;">终止开发</a>
+	</div>
+	<table class="query_form_table" id="executePlan1">
+	
+	</table>
+	<br />
+	<table disabled class="query_form_table" id="executePlan2">
+	
+   </table>
+   
+
+</div>
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="dev_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+
+<table class="query_form_table">
+	<tr>
+		<th>客户名称</th>
+		<td><input id="dev_contactName"/></td>
+		<th>概要</th>
+		<td><input id="dev_summary"/></td>
+		<th>联系人</th>
+		<td>
+			<input name="T1" size="20" id="dev_cname" />
+		</td>
+	</tr>
+	</table>
+
+
+<table class="data_list_table" id="dev_list_table"></table>
+<script>
+
+	
+	
+
+	
+	
+	
+
+
+</script>

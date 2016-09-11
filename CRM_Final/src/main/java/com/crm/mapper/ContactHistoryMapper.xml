@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.ContactHistoryMapper">
+	<!-- 根据客户id查询联系历史 -->
+	<select id="getContactHistoryByCustomerId" resultType="ContactHistory">
+		select * from contacthistory where customerid=#{customerid}
+	</select>
+	<!-- 保存联系历史 -->
+	<insert id="saveContactHistory" parameterType="Contacter">
+		insert into contacthistory(customerid,contacttime,place,summary,item,remark) values(#{customer.id},#{contacttime},#{place},#{summary},#{item},#{remark})
+	</insert>
+	<!-- 更新联系历史 -->
+	<update id="updateContactHistory" parameterType="Contacter">
+		update contacthistory set customerid=#{customer.id},contacttime=#{contacttime},place=#{place},summary=#{summary},item=#{item},remark=#{remark} where id=#{id}
+	</update>
+	<!-- 删除联系历史 -->
+	<delete id="deleteContactHistory" parameterType="Contacter">
+		delete from contacthistory where id=#{id}
+	</delete>
+	<!-- 根据customerid删除ContactHistory -->
+	<delete id="deleteContactHistoryByContactHistory" parameterType="int">
+		delete from contacthistory where customerid=#{customerid}
+	</delete>
+</mapper>

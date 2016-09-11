@@ -1,0 +1,59 @@
+
+
+<script src="../js/common.js"></script>
+<script src="../js/archService.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<div id="archServiceDialog" class="easyui-dialog" title="客户服务管理 > 服务处理" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	
+	</div>
+	<table class="query_form_table" id="archTable1"></table>
+	<br/>
+	<table class="query_form_table" id="archTable2"></table>
+	<br/>
+	<table class="query_form_table" id="archTable3"></table>
+	<br>
+	<table class="query_form_table" id="archTable4"></table>
+	
+
+</div>	
+<br />
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="archS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th height="28">客户</th>
+		<td><input id="arch_cname"/></td>
+		<th height="28">概要</th>
+		<td><input id="arch_sum"/></td>
+		<th height="28">服务类型</th>
+		<td>
+			<select name="D1" id="arch_stype">
+				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th height="22">创建日期</th>
+		<td colspan="3">
+			<input id="arch_starttime" type="text" class="easyui-datebox" ></input> - <input id="arch_endtime" type="text" class="easyui-datebox" ></input></td>
+		<th height="22">状态</th>
+		<td>
+			<select name="D1" id="arch_statu">
+				<option selected value=40>已归档
+				
+				</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<table id="archService_list_table" class="data_list_table"></table>

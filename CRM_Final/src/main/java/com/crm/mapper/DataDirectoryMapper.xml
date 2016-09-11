@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.DataDirectoryMapper">
+		<select id="getCustomerGradeAndCount" parameterType="map" resultType="DataDirectory">
+		select tiaomu as tiaomu, count(cname) as customercount from datadirectorys 
+		inner join customer on customer.grade = datadirectorys.id
+		group by tiaomu 
+	</select>
+	
+	<select id="getCustomerSatisfactionAndCount" parameterType="map" resultType="DataDirectory">
+		select tiaomu as tiaomu, count(cname) as customercount from datadirectorys 
+		inner join customer on customer.satisfaction = datadirectorys.id
+		group by tiaomu 
+	</select>
+	
+	<select id="getCustomerCreditAndCount" parameterType="map" resultType="DataDirectory">
+		select tiaomu as tiaomu, count(cname) as customercount from datadirectorys 
+		inner join customer on customer.credit = datadirectorys.id
+		group by tiaomu
+	</select>
+	
+
+		<select id="getServiceStatus" resultType="DataDirectory">
+		select * from datadirectorys where id=#{servicestatus}
+	</select>
+	
+	<select id="getServiceType" resultType="DataDirectory">
+		select * from datadirectorys where id=#{servicetype}
+	</select>
+	
+	<select id="getServiceSatisify" resultType="DataDirectory">
+		select * from datadirectorys where id=#{satisify}
+	</select>
+	
+
+	<select id="getDataDirectory" resultType="DataDirectory">
+		select * from datadirectorys where id=#{chancestatus}
+	</select>
+
+	<select id="getUserRole"  resultType="DataDirectory">
+		select * from datadirectorys where id=#{role}
+	</select>
+	
+	<select id="getUserSex"  resultType="DataDirectory">
+		select * from datadirectorys where id=#{sex}
+	</select>
+	
+	<select id="getUserIsassign"  resultType="DataDirectory">
+		select * from datadirectorys where id=#{isassign}
+	</select>
+	
+	<select id="getDataDirectoryByType" parameterType="map" resultType="DataDirectory">
+		select * from datadirectorys where dtype=#{dtype}
+	</select>
+	<!-- 查询出所有的数据字典数据   作为初始化数据 -->
+	<select id="getAllDataDirectory" resultType="DataDirectory">
+		select * from datadirectorys
+	</select>
+	<sql id="conditionSql">
+		from datadirectorys
+		<where>
+			<if test="dname !=null and dname!=''">
+				dname like '%${dname}%'
+			</if>
+			<if test="tiaomu !=null and tiaomu != ''">
+				and tiaomu like '%${tiaomu}%'
+			</if>
+			<if test="dvalue !=null and dvalue != ''">
+				and dvalue like '%${dvalue}%'
+			</if>
+		</where>
+	</sql>
+	<!-- 数据字典管理 -->
+	<select id="getAllDataDirectoryWithCondition" parameterType="map" resultType="DataDirectory">
+		select * <include refid="conditionSql"></include>
+	</select>
+	<select id="getAllDataDirectoryCountWithCondition" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"></include>
+	</select>
+	<!-- 更新 -->
+	<update id="updateDataDirectory" parameterType="DataDirectory">
+		update datadirectorys set dtype=#{dtype},dname=#{dname},tiaomu=#{tiaomu},dvalue=#{dvalue},isedit=#{isedit} where id=#{id}
+	</update>
+	<!-- 增加 -->
+	<insert id="insertDataDirectory" parameterType="DataDirectory">
+		insert into datadirectorys(dtype,dname,tiaomu,dvalue,isedit) values(#{dtype},#{dname},#{tiaomu},#{dvalue},#{isedit})
+	</insert>
+	
+</mapper>

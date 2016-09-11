@@ -1,0 +1,35 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/cons.js"></script>
+
+<div id="consC" class="easyui-dialog" title="客户构成分析 > 饼状图 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div id="cons_chart" style="height: 300px;max-width:500px; padding:100px"></div>
+</div>
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="consS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="OpenconsC();return false;">查看图表</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th>报表方式</th>
+		<td>
+			<select id="cons_type">
+				<option value='grade' selected>按等级</option>
+				<option value="credit">按信用度</option>
+				<option value="satisfaction">按满意度</option>
+			</select>
+		</td>
+
+	<th>&nbsp;</th>
+		<td>
+			&nbsp;
+		</td>
+			</tr>
+</table>
+<br />
+<table id="cons_list_table" class="data_list_table"></table>

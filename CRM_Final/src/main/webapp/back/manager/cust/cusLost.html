@@ -1,0 +1,39 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/cusLost.js"></script>
+
+
+<div id="cusLostDialog" class="easyui-dialog" title="客户服务管理 > 服务处理" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveDelayLost" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	<table class="query_form_table" id="cusLostTable1">
+	</table>
+
+	
+</div>	
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="cusLost_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+</div>
+<table class="query_form_table">
+	<tr>
+		<th>客户</th>
+		<td><input id="lost_name"/></td>
+		<th>客户经理</th>
+		<td><input id="lost_manager"/></td>
+		<th>状态</th>
+		<td>
+			<select id="lost_status">
+				
+			</select>
+		</td>
+	</tr>
+	</table>
+<br />
+<table class="data_list_table" id="cusLost_list_table"></table>

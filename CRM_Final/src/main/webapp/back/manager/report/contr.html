@@ -1,0 +1,36 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/contr.js"></script>
+
+<div id="contrC" class="easyui-dialog" title="客户贡献分析 > 饼状图 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div id="container1" style="height: 300px;max-width:500px; padding:100px"></div>
+</div>
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="contrS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="opencontrC();return false;">查看图表</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th>客户名称</th>
+		<td><input id="contr_cname" /></td>
+		<th>年份</th>
+		<td>
+			<select id="contr_year">
+				<option value=''>全部</option>
+				<option  value=2011>2011</option>
+				<option  value=2016>2016</option>
+				<option value=2017>2017</option>
+				<option value=2018>2018</option>
+				<option value=2019>2019</option>
+				<option value=2020>2020</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<table id="contr_list_table" class="data_list_table"></table>

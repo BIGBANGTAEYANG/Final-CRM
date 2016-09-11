@@ -1,0 +1,26 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/searchStore.js"></script>
+
+
+
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="storeS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th>产品</th>
+		<td><input id="ss_pro"/></td>
+		<th>仓库</th>
+		<td><input id="ss_sto"/></td>
+		<th>&nbsp;</th>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+<br />
+<table id="searchStore_list_table" class="data_list_table"></table>

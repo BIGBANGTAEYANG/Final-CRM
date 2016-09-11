@@ -1,0 +1,66 @@
+
+
+<script src="../js/common.js"></script>
+<script src="../js/dealService.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<div id="dealServiceDialog" class="easyui-dialog" title="客户服务管理 > 服务处理" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveDealService" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	<table class="query_form_table" id="dealTable1"></table>
+	<br/>
+	<table class="query_form_table" id="dealTable2"></table>
+	<br/>
+	<table class="query_form_table" id="dealTable3">
+	<tr>
+		<th>服务处理</th>
+		<td colspan="3"><textarea rows="6" cols="50" id="deal_result"></textarea><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>处理人</th>
+		<td><input name="T17" value="" readonly size="20" id="deal_curr" /><span class="red_star">*</span></td>
+		<th>处理时间</th>
+		<td><input name="T16" readonly size="20"  id="deal_time"/><span class="red_star">*</span></td>
+	</tr>
+</table>
+</div>	
+<br />
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="dealS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th height="28">客户</th>
+		<td><input id="deal_cname"/></td>
+		<th height="28">概要</th>
+		<td><input id="deal_sum"/></td>
+		<th height="28">服务类型</th>
+		<td>
+			<select name="D1" id="deal_stype">
+				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th height="22">创建日期</th>
+		<td colspan="3">
+			<input name="T2" size="10" id="deal_starttime" /> - <input name="T1" size="10" id="deal_endtime" /></td>
+		<th height="22">状态</th>
+		<td>
+			<select name="D1" id="deal_statu">
+				<option selected value=37 >已分配
+				
+				</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<table id="dealService_list_table" class="data_list_table"></table>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.LostMapper">
+
+    <select id="customerLostAnalysis" parameterType="map" resultMap="analysismap">
+		select customerid,customername,lostreason,confirmlostdate,name from lost 
+			inner join orderinfo on lost.orderinfoid=orderinfo.id
+			inner join customer on orderinfo.customername = customer.cname
+			inner join userinfo on customer.customermanagerid = userinfo.id
+			<include refid="analysisconditionSql"></include>
+	</select>
+	
+	<sql id="analysisconditionSql">
+		<where>
+			<if test="customername !=null and customername != ''">
+					customername like '%${customername}%'
+			</if>
+			<if test="name !=null and name != ''">
+					name like '%${name}%'
+			</if>
+		</where>
+	</sql>
+	
+	
+	<resultMap type="Lost"  id="analysismap">
+		<association property="customer" column="customerid" select="com.crm.mapper.CustomerMapper.getCustomerById"></association>
+		<association property="userinfo" column="name" select="com.crm.mapper.UserInfoMapper.getUserInfoByname"></association>
+	</resultMap>
+    
+	<!-- 通过orderinfo的id查询lost -->
+	<select id="getLostByOrderInfoId" resultType="Lost">
+		select * from lost where orderinfoid=#{orderInfo.id}
+	</select>
+	<!-- 根据id删除lost -->
+	<delete id="deleteLostById" parameterType="int">
+		delete from lost where id=#{id}
+	</delete>
+	<resultMap type="Lost" id="LostMap">
+		<association property="orderInfo" column="orderinfoid" select="com.crm.mapper.OrderInfoMapper.getOrderInfoById"></association>
+	</resultMap>
+	<!-- 查询出所有的lost -->
+	<select id="getAllLost" resultMap="LostMap">
+		select * from lost
+	</select>
+	<!-- 查询出数量 -->
+	<select id="getLostCount" resultType="int">
+		select count(*) from lost
+	</select>
+	<sql id="conditionSql">
+		from lost
+		<where>
+			<if test="cname !=null and cname != ''">
+				orderinfoid in (select id from orderinfo where customerid in (select id from customer where cname like '%${cname}%'))
+			</if>
+			<if test="manname !=null and manname != ''">
+				and orderinfoid in (select id from orderinfo where customerid in (select id from customer where customermanagerid in (select id from userinfo where name like '%${manname}%')))
+			</if>
+			<if test="status !=null and status != ''">
+				and orderinfoid in (select id from orderinfo where customerid in (select id from customer where customerstatus=#{status}))
+			</if>
+		</where>
+	</sql>
+	<!-- 查询 -->
+	<select id="getLostCondition" parameterType="map" resultMap="LostMap">
+		select * <include refid="conditionSql"></include>
+	</select>
+	<!-- 查询出数量 -->
+	<select id="getLostCountCondition" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"></include>
+	</select>
+	
+	<select id="getLostOrderInfoId" resultType="int">
+		select orderinfoid from lost
+	</select>
+	<!-- 定时器自动增加lost任务 -->
+	<insert id="insertLostByOrderInfo" parameterType="Lost">
+		insert into lost(orderinfoid) values(#{id})
+	</insert>
+	<sql id="updateCondition">
+		set
+		<if test="lostreason != null and lostreason != ''">
+			lostreason=#{lostreason},confirmlostdate=now()
+		</if>
+		<if test="measure != null and measure != '' and addmeasure != null and addmeasure != ''">
+			 measure=#{measure}, addmeasure=#{addmeasure}
+		</if>
+		<where>
+			id=#{id}
+		</where>
+	</sql>
+	<!-- 更新lost -->
+	<update id="updateLost" parameterType="map">
+		update lost <include refid="updateCondition"></include>
+	</update>
+</mapper>

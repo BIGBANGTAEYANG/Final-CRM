@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.OrderInfoMapper">
+		<!-- 得到用户以及用户的总金额 -->
+	<select id="getOrderInfoAndSumPrice" parameterType="map" resultMap="OrderInfoMapWithCustomer">
+			select customer.id as customerid,customername,sum(countprice) as sumprice<include refid="conditionSql"/>
+	</select>
+	<sql id="conditionSql">
+		from orderinfo inner  join orderitem on orderinfo.id = orderitem.orderid 
+		inner join customer on orderinfo.customerid = customer.id 
+		<where>
+			<if test="customername!=null and customername!=''">
+				customername like '%${customername}%'
+			</if>
+			<if test="createtime!=null and createtime!=''">
+			 and year(ordertime) =#{createtime}
+			</if>
+		</where>
+		group by customerid
+	</sql>
+	
+
+	<!-- 根据客户id查询订单(不含订单项) -->
+	<select id="getOrderInfoByCustomerId" resultMap="OrderInfoMap">
+		select * from orderinfo where customerid=#{customer.id}
+	</select>
+	<!-- 不含订单项 -->
+	<resultMap type="OrderInfo" id="OrderInfoMap">
+		<association property="orderstatus" column="orderstatus" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+	</resultMap>
+	<!-- 根据customerid删除OrderInfo -->
+	<delete id="deleteOrderInfoByCustomerId" parameterType="int">
+		delete from orderinfo where customerid=#{customerid}
+	</delete>
+	<!-- 根据orderinfo的id查询 -->
+	<select id="getOrderInfoById" resultMap="OrderInfoMapWithCustomer">
+		select * from orderinfo where id=#{id}
+	</select>
+	<!-- 含customer的映射 -->
+	<resultMap type="OrderInfo" id="OrderInfoMapWithCustomer">
+		<association property="customer" column="customerid" select="com.crm.mapper.CustomerMapper.getCustomerByIdWithoutMap"></association>
+	</resultMap>
+	<!-- 选出下定时间超过指定时间的订单 -->
+	<select id="getOrderInfoOverDate" parameterType="map" resultType="int">
+		select id from orderinfo group by customerid having (datediff(now(),max(ordertime))>#{limitday})
+	</select>
+</mapper>

@@ -1,0 +1,53 @@
+
+
+<script src="../js/common.js"></script>
+<script src="../js/addService.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+
+<div >
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:saveNewService()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >保存</a>
+	</div>
+	
+	<table class="query_form_table">
+	<tr>
+		<th>编号</th>
+		<td><input disabled /></td>
+		<th>服务类型</th>
+		<td>
+			<select id="service_type">
+				
+			</select><span class="red_star">*</span>
+		</td>
+	</tr>
+	<tr>
+		<th>概要</th>
+		<td colspan="3"><input size="53" id="service_sum"/><span class="red_star">*</span></td>
+	</tr>	
+	<tr>
+		<th>客户</th>
+		<td><select id="service_cus"></select><span class="red_star">*</span></td>
+		<th>状态</th>
+		<td>
+		<select id="service_status" disabled>
+				<option value=36 selected>新创建</option>
+			</select>
+		<span class="red_star">*</span></td>
+	</tr>	
+	<tr>
+		<th>服务请求</th>
+		<td colspan="3"><textarea rows="6" cols="50" id="service_req"></textarea><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>创建人</th>
+		<td><input name="T19"  readonly size="20"  id="service_curr"/><span class="red_star">*</span></td>
+		<th>创建时间</th>
+		<td><input id="service_createtime" name="T15" readonly size="20" /><span class="red_star">*</span></td>
+	</tr>
+	</table>
+
+</div>
+
+

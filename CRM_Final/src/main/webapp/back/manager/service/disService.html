@@ -1,0 +1,42 @@
+
+
+<script src="../js/common.js"></script>
+<script src="../js/disService.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="disS_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+	
+	<table class="query_form_table" height="53">
+	<tr>
+		<th height="28">客户</th>
+		<td><input id="dis_cname"/></td>
+		<th height="28">概要</th>
+		<td><input id="dis_sum"/></td>
+		<th height="28">服务类型</th>
+		<td>
+			<select name="D1" id="dis_stype">
+				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th height="22">创建日期</th>
+		<td colspan="3">
+			<input name="T2" size="10" id="dis_starttime" /> - <input name="T1" size="10" id="dis_endtime" /></td>
+		<th height="22">状态</th>
+		<td>
+			<select name="D1"  id="dis_statu">
+				<option selected value=36>新创建
+				
+				</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<table id="disService_list_table" class="data_list_table"></table>

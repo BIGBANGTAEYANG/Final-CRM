@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.PlanMapper">
+	<select id="getPlanList"  parameterType="Plan"  resultMap="PlanMap">
+			select * from plan where chanceid=#{chance.id}
+	</select>
+	
+	<insert id="insertPlan"  parameterType="Plan">
+		<selectKey keyProperty="id"  resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from plan
+		</selectKey>
+			insert into plan values(#{id},#{chance.id},#{plantime},#{planitem},#{result})
+	</insert>
+	
+	<update id="updatePlan" parameterType="Plan">
+		update plan set planitem=#{planitem},plantime=#{plantime},result=#{result} where  id=#{id}
+	</update>
+	
+	<delete id="deletePlan">
+		delete  from plan where id=#{id}
+	</delete>
+
+	<resultMap type="Plan"  id="PlanMap">
+		<association property="chance"   column="chanceid"  select="com.crm.mapper.ChanceMapper.getChanceDetail"/>
+	</resultMap>
+	
+	<select id="getPlanByChanceId" resultType="Plan">
+		select * from plan where chanceid=#{chance.id}
+	</select>
+</mapper>

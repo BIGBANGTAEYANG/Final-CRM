@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.KuCunMapper">
+	<sql id="conditionSql">
+		from kucun
+	<where>
+			<if test="product != null and product != ''">
+				product like '%${product}%'
+			</if>
+			<if test="storehouse != null and storehouse != ''">
+				and storehouse like '%${storehouse}%'
+			</if>
+		</where>
+	</sql>
+	<select id="getKuCunCondition" parameterType="map" resultType="KuCun">
+		select * <include refid="conditionSql"></include>
+	</select>
+	<select id="getKuCunConditionCount" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"></include>
+	</select>
+</mapper>

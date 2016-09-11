@@ -1,0 +1,270 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/cusInfo.js"></script>
+
+
+
+<div id="linkmanList" class="easyui-dialog" title="客户信息管理 > 客户信息 > 联系人 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closelinkmanList()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="linkSaveButton" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">新建</a>
+	</div>
+	
+	<table class="query_form_table">
+	<tr>
+		<th>客户编号</th>
+		<td><input type ="text" id="linkman_id" disabled/></td>
+		<th>客户名称</th>
+		<td><input type="text" id="linkman_cname" disabled/></td>
+	</tr>
+	</table>
+<br />
+	<table class="data_list_table" id="linkman_table">
+		
+	</table>
+</div>
+
+
+<div id="addLinkMan" class="easyui-dialog" title="客户信息管理 > 客户信息 > 联系人 > 新建联系人 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeAddLinkMan()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveNewLinkman" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	
+	<table class="query_form_table">
+	<tr>
+		<th>姓名</th>
+		<td><input id="link_cname" /><span class="red_star">*</span></td>
+		<th>性别</th>
+		<td>
+			<input type="radio" name="gander" checked id="sex"  value="26"/>男
+			<input type="radio" name="gander" id="sex" value="27" />女
+		</td>
+	</tr>
+	<tr>
+		<th>职位</th>
+		<td>
+		<select id="post"></select>
+		</td>
+		<th>办公电话</th>
+		<td><input id="link_tel" /><span class="red_star">*</span></td>
+	</tr>	
+	<tr>
+		<th>手机</th>
+		<td><input id="link_cell" name="T1" size="20" /></td>
+		<th>备注</th>
+		<td><input id="remark" name="T2" size="20" /></td>
+	</tr>
+<br />
+	<table class="data_list_table" id="linkman_table">
+		
+	</table>
+</div>
+
+
+<div id="historyDetail" class="easyui-dialog" title="客户信息管理 > 客户信息 > 联系人 > 新建联系人 " data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeAddLinkMan()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	</div>
+	
+	<table class="query_form_table" id="detailTable1">
+	</table>
+	<br/>
+	<table class="data_list_table" id="detailTable2">
+		
+	</table>
+</div>
+
+
+<div id="addActivity" class="easyui-dialog" title="客户信息管理 > 客户信息 > 交往记录 > 新建交往记录" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeAddActivity()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveNewActivity" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	
+	<table class="query_form_table" id="addActivityTable1">
+	<tr>
+		<th>时间</th>
+		<td><input id="dd" type="text" class="easyui-datebox" required="required"></input><span class="red_star">*</span></td>
+		<th>地点</th>
+		<td>
+			<input name="T1" id="act_loc" size="20" /><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>概要</th>
+		<td><input name="T3" value="" id="act_sum" size="20" /><span class="red_star">*</span></td>
+		<th>备注</th>
+		<td><input name="T4" id ="act_rem" size="20" /></td>
+	</tr>	
+	<tr>
+		<th>详细信息</th>
+		<td colspan="3">
+			<textarea cols="50" rows="6" name="S1" id="act_detail"></textarea>
+		</td>
+	</tr>
+</table>
+		
+	</table>
+</div>
+
+
+
+<div id="editInfoOption" class="easyui-dialog" title="客户信息管理 > 客户信息" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >联系人</a>
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="saveSaleOption();return false;">交往记录</a>
+	<a  href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >历史订单</a>
+	<a  href="javascript:closeInfoOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveCusInfo" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="saveCusInfo();return false;">保存</a>
+	</div>
+	<table class="query_form_table">
+	<tr>
+		<th>客户编号</th>
+		<td><input value="" id="cus_id" disabled /><span class="red_star">*</span></td>
+		<th>名称</th>
+		<td><input value="" id="cus_cname" /><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>地区</th>
+		<td>
+			<select id="cus_district">
+				
+			</select>
+			<span class="red_star">*</span></td>
+		<th>客户经理</th>
+		<td>
+			<select id="cus_customermanager">
+				
+			</select><span class="red_star">*</span>
+		</td>
+	</tr>	
+	<tr>
+		<th>客户等级</th>
+		<td>
+			<select id="cus_grade">
+				
+				
+			</select><span class="red_star">*</span>
+		</td>
+		<th>　</th>
+		<td>　</td>
+	</tr>
+	<tr>
+		<th>客户满意度</th>
+		<td>
+			<select id="satisfaction">
+			</select><span class="red_star">*</span>
+		</td>
+		<th>客户信用度</th>
+		<td>
+			<select id="credit">
+			
+			</select><span class="red_star">*</span>
+		</td>
+	</tr>
+</table>
+<br />
+<table class="query_form_table" id="table1">
+	<tr>
+		<th>地址</th>
+		<td><input value="" id="cus_location"  /><span class="red_star">*</span>
+		</td>
+		<th>邮政编码</th>
+		<td><input value="" name="T1" size="20" id="postcode" /><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>电话</th>
+		<td>
+			<input value=""  id="cus_telphone" name="T4" size="20"  /><span class="red_star">*</span></td>
+		<th>传真</th>
+		<td>
+			<input value="" id="fax" name="T5" size="20"  /><span class="red_star">*</span>
+		</td>
+	</tr>	
+	<tr>
+		<th>网址</th>
+		<td>
+			<input id="website" value="" id="website" name="T6" size="20"  /><span class="red_star">*</span>
+		</td>
+		<th>　</th>
+		<td>　</td>
+	</tr>
+</table>
+<br />
+<table class="query_form_table" id="table2">
+	<tr>
+		<th>营业执照注册号</th>
+		<td><input id="license" value="" name="T13" size="20" /></td>
+		<th>法人</th>
+		<td><input id="legal" value="" name="T3" size="20" /><span class="red_star">*</span>
+		</td>
+	</tr>
+	<tr>
+		<th>注册资金（万元）</th>
+		<td>
+			<input id="registermoney" value="" name="T7" size="20" /> </td>
+		<th>年营业额</th>
+		<td>
+			<input id="yearincome" value="" name="T8" size="20" />
+		</td>
+	</tr>	
+	<tr>
+		<th>开户银行</th>
+		<td>
+			<input id="bank" value="" name="T9" size="20" /><span class="red_star">*</span>
+		</td>
+		<th>银行帐号</th>
+		<td><input id="bankaccount" value="" name="T10" size="20" /><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>地税登记号</th>
+		<td>
+			<input id="rentnumber" value="" name="T11" size="20" /></td>
+		<th>国税登记号</th>
+		<td><input id="taxnumber" value="" name="T12" size="20" /></td>
+	</tr>
+</table>
+</div> 
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="cusInfo_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+
+<table class="query_form_table">
+	<tr>
+		<th>客户编号</th>
+		<td><input id="id"/></td>
+		<th>名称</th>
+		<td><input id="cname" /></td>
+		<th>地区</th>
+		<td>
+			<select  id="location">
+				
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>客户经理</th>
+		<td><input id="manager"/></td>
+		<th>客户等级</th>
+		<td>
+			<select id="level">
+				
+			</select>
+		</td>
+		<th>　</th>
+		<td>　</td>
+	</tr>
+	</table>
+
+
+<table class="data_list_table" id="cus_list_table"></table>
+

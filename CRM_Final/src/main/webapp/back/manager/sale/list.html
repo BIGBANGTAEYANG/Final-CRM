@@ -1,0 +1,117 @@
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/common.js"></script>
+<script src="../js/list.js"></script>
+
+<div id="dispatchSaleOption" class="easyui-dialog" title="销售机会管理  > 分配销售机会" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+	<div class="button_bar">
+	<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a  href="javascript:closeDispatchOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a  id="saveDispatch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">保存</a>
+	</div>
+	
+	<table id="dispatchTable" class="query_form_table" >
+	</table>
+	<table class="query_form_table" id="dispatchTable2">
+	<tr>
+		<th>指派给</th>
+		<td>
+			<select name="D1" id="dispatchCus">
+				
+			</select> <span class="red_star">*</span></td>
+		<th>指派时间</th>
+		<td>
+			<input id="dispatchTime" name="T20" readonly size="20" /><span class="red_star">*</span></td>
+	</tr>
+</table>
+</div>
+<div id="addSaleOption" class="easyui-dialog" title="销售机会管理  > 新建销售机会" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true,fit:true">
+<br/>
+<div class="button_bar">
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="goBack" href="javascript:closeSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >返回</a>
+	<a id="save" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="saveSaleOption();return false;">保存</a>
+	</div>
+	<table class="query_form_table">
+	<tr>
+		<th>编号</th>
+		<td><input readonly id="id"/></td>
+		<th>机会来源</th>
+		<td>
+			<input name="T4" size="20" id="chancesource"/></td>
+	</tr>
+	<tr>
+		<th>客户名称</th>
+		<td><input required id="customername" /><span class="red_star">*</span></td>
+		<th>成功机率</th>
+		<td><input type="number" id="success"  min="0" max="100" required/><span class="red_star">*</span></td>
+	</tr>	
+	<tr>
+		<th>概要</th>
+		<td colspan="3"><input required  id="chancesummary" name="T0" size="52" /><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>联系人</th>
+		<td><input name="T21" size="20" id="contacter"/></td>
+		<th>联系人电话</th>
+		<td><input name="T5" size="20" id="telephone" /></td>
+	</tr>
+	<tr>
+		<th>机会描述</th>
+		<td colspan="3"><textarea required id="chancedescribe" rows="6" cols="50" name="S1"></textarea><span class="red_star">*</span></td>
+	</tr>
+	<tr>
+		<th>创建人</th>
+		<td><input required name="T19"  id="creater" readonly size="20"  /><span class="red_star">*</span></td>
+		<th>创建时间</th>
+		<td><input required id="createtime" name="T15" readonly size="20" /><span class="red_star">*</span></td>
+	</tr>
+</table>
+<br />
+<table disabled class="query_form_table" id="table1">
+	<tr>
+		<th>指派给</th>
+		<td>
+			<select name="D1" id="cusManager">
+				
+			</select> <span class="red_star">*</span></td>
+		<th>指派时间</th>
+		<td>
+			<input id="assigntime" name="T20" readonly size="20" disabled /><span class="red_star">*</span></td>
+	</tr>
+</table>
+
+</div>
+<div class="button_bar">
+	
+	<a id="help" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help'" onclick="alert('欢迎使用');return false;">帮助</a>
+	<a id="add" href="javascript:addSaleOption()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >新建</a>
+	<a id="list_search" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="return false;">查询</a>
+	</div>
+
+<table class="query_form_table">
+	<tr>
+		<th>客户名称</th>
+		<td><input id="contactName"/></td>
+		<th>概要</th>
+		<td><input id="summary"/></td>
+		<th>联系人</th>
+		<td>
+			<input name="T1" size="20" id="cname" />
+		</td>
+	</tr>
+	</table>
+
+
+<table class="data_list_table" id="data_list_table"></table>
+
+
+	
+	
+
+	
+	
+	
+
+
+</script>

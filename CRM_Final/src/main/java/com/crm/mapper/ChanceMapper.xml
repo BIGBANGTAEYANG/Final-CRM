@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.ChanceMapper">
+	<select id="findChanceByCondition" parameterType="map" resultMap="DataDirectoryMap">
+		select * <include refid="conditionSql"/>
+	</select>
+	
+	<select id="findChanceByConditionCount" parameterType="map" resultType="int">
+		select count(*) <include refid="conditionSql"/>
+	</select>
+		<sql id="conditionSql">
+		from chance 
+		<where>
+			<if test="contactername!=null and contactername!=''">
+				 contacename like '%${contactername}%'
+			</if>
+			<if test="customername!=null and customername!=''">
+				and customername like '%${customername}%'
+			</if>
+			<if test="chancesummary!=null and chancesummary!=''">
+				and chancesummary like '%${chancesummary}%'
+			</if>
+		</where>
+	</sql>
+	
+	
+	<insert id="savechance"  parameterType="Chance">
+		<selectKey keyProperty="id"  resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from chance
+		</selectKey>
+			insert into chance values(#{id},#{chancesource},#{customername},#{success},#{chancesummary},#{contacter.cname},#{chancedescribe},#{creater},#{createtime},#{user.id},#{assigntime},#{chancestatus.id})
+	</insert>
+
+	<update id="updateChance" parameterType="Chance">
+		update chance set chancesource=#{chancesource},customername=#{customername},success=#{success},
+		chancesummary=#{chancesummary},contacename=#{contacter.cname},chancedescribe=#{chancedescribe},creater=#{creater},
+		createtime=#{createtime},userid=#{user.id},assigntime=#{assigntime},chancestatus=#{chancestatus.id} where  id=#{id}
+	</update>
+	
+	<delete id="deleteChanceById">
+		delete  from chance where id=#{id}
+	</delete>
+	
+	<select id="findAllChance" resultMap="DataDirectoryMap">
+		select * from chance 
+	</select>
+	
+	
+	<select id="findChanceByChancechancestatus" resultMap="DataDirectoryMap">
+		select * from chance where chancestatus=#{chancestatus.id}
+	</select>
+	
+	<select id="getChanceCount" resultType="int">
+		select count(*) from chance where chancestatus=#{chancestatus.id}
+	</select>
+	
+	<select id="getChanceDetail" resultMap="DataDirectoryMap">
+		select * from chance where id=#{id}
+	</select>
+	
+	<resultMap type="Chance"  id="DataDirectoryMap">
+		<association property="chancestatus"   column="chancestatus"  select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"/>
+		<association property="user"   column="userid"  select="com.crm.mapper.UserInfoMapper.getUserInfo"/>
+		<association property="contacter" column="contacename" select="com.crm.mapper.ContacterMapper.getContacterByName"></association>
+	</resultMap>
+	
+	<!-- 根据顾客名称查询chance -->
+	<select id="getChanceByCustomerName" resultType="Chance">
+		select * from chance where customername=#{customername}
+	</select>
+	<!-- 根据客户id删除chance -->
+	<delete id="deleteChanceByCustomerName">
+		delete from chance where customername=#{customername}
+	</delete>
+</mapper>
+

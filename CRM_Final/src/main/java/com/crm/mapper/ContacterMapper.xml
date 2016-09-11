@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.mapper.ContacterMapper">
+	<select id="getContacterByName" resultType="Contacter">
+		select * from
+		contacter where cname=#{cname}
+	</select>
+
+	<insert id="saveContacter"  parameterType="Contacter">
+		<selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+			select max(id)+1 as id from contacter
+		</selectKey>
+		insert into contacter  values(#{id},#{customer.id},#{cname},26,29,'010-110114119',#{telphone},'this is remark')
+	</insert>
+	
+	<!-- 没有映射customer -->
+	<resultMap type="Contacter" id="ContacterMap">
+		<association property="sex" column="sex" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+		<association property="post" column="post" select="com.crm.mapper.DataDirectoryMapper.getDataDirectory"></association>
+	</resultMap>
+	<!-- 通过Contactr中customerid查询联系人 -->
+	<select id="getContacterByCustomerId" parameterType="map" resultMap="ContacterMap">
+		select * from contacter where customerid=#{customerid}
+	</select>
+	<!-- 保存 -->
+	<insert id="saveContacterDetail" parameterType="Contacter">
+		insert into contacter(customerid,cname,sex,post,telphone,cellphone,remark) values(#{customer.id},#{cname},#{sex.id},#{post.id},#{telphone},#{cellphone},#{remark})
+	</insert>
+	<!-- 更新 -->
+	<update id="updateContacterDetail" parameterType="Contacter">
+		update contacter set customerid=#{customer.id},cname=#{cname},sex=#{sex.id},post=#{post.id},telphone=#{telphone},cellphone=#{cellphone},remark=#{remark} where id=#{id}
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteContacterDetail" parameterType="Contacter">
+		delete from contacter where id=#{id}
+	</delete>
+	<!-- 根据customerid删除 -->
+	<delete id="deleteContacterByCustomerId" parameterType="int">
+		delete from contacter where customerid=#{customerid}
+	</delete>
+</mapper>
